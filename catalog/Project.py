@@ -1,14 +1,20 @@
-from flask import Flask, render_template, url_for, request, redirect, jsonify, make_response, flash
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, Category, CategoryItem, User
 from flask import session as login_session
-import random, string, json, httplib2, requests
+from flask import Flask, render_template
+from flask import url_for, request, redirect, jsonify, make_response, flash
 from oauth2client.client import flow_from_clientsecrets, FlowExchangeError
+import random
+import string
+import json
+import httplib2
+import requests
 
 app = Flask(__name__)
 
-CLIENT_ID = json.loads(open('client_secrets.json', 'r').read())['web']['client_id']
+CLIENT_ID = json.loads(
+    open('client_secrets.json', 'r').read())['web']['client_id']
 
 engine = create_engine('sqlite:///Catalog.db')
 Base.metadata.bind = engine
@@ -16,8 +22,11 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
+
 def createUser(login_session):
-    newUser = User(name=login_session['username'], email=login_session['email'], picture=login_session['picture'])
+    newUser = User(name=login_session['username'],
+                   email=login_session['email'],
+                   picture=login_session['picture'])
     DBSession = sessionmaker(bind=engine)
     sessions = DBSession()
     sessions.add(newUser)
@@ -42,48 +51,63 @@ def getUserID(email):
     except:
         return None
 
+
 @app.route('/')
 @app.route('/catalog')
 def showCategories():
-	DBSession = sessionmaker(bind=engine)
-	sessions = DBSession()
-	categories = sessions.query(Category).all()
-	categoryItems = sessions.query(CategoryItem).all()
-	return render_template('MainMenu.html', categories = categories, categoryItems = categoryItems)
+    DBSession = sessionmaker(bind=engine)
+    sessions = DBSession()
+    categories = sessions.query(Category).all()
+    categoryItems = sessions.query(CategoryItem).all()
+    return render_template('MainMenu.html', categories=categories,
+                           categoryItems=categoryItems)
+
 
 @app.route('/catalog/<int:catalog_id>')
 @app.route('/catalog/<int:catalog_id>/items')
 def showCategory(catalog_id):
-	DBSession = sessionmaker(bind=engine)
-	sessions = DBSession()
-	categories = sessions.query(Category).all()
+    DBSession = sessionmaker(bind=engine)
+    sessions = DBSession()
+    categories = sessions.query(Category).all()
 
-	category = sessions.query(Category).filter_by(id = catalog_id).first()
+    category = sessions.query(Category).filter_by(id=catalog_id).first()
 
-	categoryName = category.name
+    categoryName = category.name
 
-	categoryItems = sessions.query(CategoryItem).filter_by(category_id = catalog_id).all()
+    categoryItems = sessions.query(
+                                   CategoryItem).filter_by(
+                                   category_id=catalog_id).all()
 
-	categoryItemsCount = sessions.query(CategoryItem).filter_by(category_id = catalog_id).count()
+    categoryItemsCount = sessions.query(
+                                        CategoryItem).filter_by(
+                                        category_id=catalog_id).count()
 
-	return render_template('category.html', categories = categories, categoryItems = categoryItems, categoryName = categoryName, categoryItemsCount = categoryItemsCount)
+    return render_template(
+                           'category.html', categories=categories,
+                           categoryItems=categoryItems,
+                           categoryName=categoryName,
+                           categoryItemsCount=categoryItemsCount)
+
 
 @app.route('/catalog/<int:catalog_id>/items/<int:item_id>')
 def showCategoryItem(catalog_id, item_id):
-	DBSession = sessionmaker(bind=engine)
-	sessions = DBSession()
-	categoryItem = sessions.query(CategoryItem).filter_by(id = item_id).first()
+    DBSession = sessionmaker(bind=engine)
+    sessions = DBSession()
+    categoryItem = sessions.query(CategoryItem).filter_by(id=item_id).first()
 
-	creator = getUserInfo(categoryItem.user_id)
+    creator = getUserInfo(categoryItem.user_id)
 
-	return render_template('Item.html', categoryItem = categoryItem, creator = creator)
+    return render_template(
+                           'Item.html', categoryItem=categoryItem,
+                           creator=creator)
+
 
 @app.route('/catalog/add', methods=['GET', 'POST'])
 def addItem():
-	DBSession = sessionmaker(bind=engine)
-	sessions = DBSession()
-	if 'username' not in login_session:
-	    return redirect('/login')
+    DBSession = sessionmaker(bind=engine)
+    sessions = DBSession()
+    if 'username' not in login_session:
+        return redirect('/login')
 
 	if request.method == 'POST':
 
