@@ -1,0 +1,38 @@
+{% extends "Main.html" %}
+
+{% block content %}
+
+	<div class="row">
+		<div class="category-item column">
+			<h6 class="category-item_header">
+				<span class="header_title">Edit Item</span>
+				<span class="header_bar"></span>
+			</h6>
+			<form action="#" method="post" class="category-item_form">
+				<fieldset>
+					<label for="" class="form_label">Name:</label>
+					<input type="text" name="name" value="{{categoryItem.name}}" class="form_input">
+					<br>
+					<label for="" class="form_label">Description:</label>
+					<br>
+					<textarea name="description" id="" cols="30" rows="10" class="form_textarea">{{categoryItem.description}}</textarea>
+					<br>
+					<label for="" class="form_label">Category:</label>
+					<select class="form_select" name="category">
+						{% for category in categories %}
+							{% if categoryItem.category_id == category.id %}
+								<option selected value="{{category.id}}">{{category.name}}</option>
+							{% else %}
+								<option value="{{category.id}}">{{category.name}}</option>
+							{% endif %}
+						{% endfor %}
+					</select>
+				</fieldset>
+				<a href="{{url_for('showCategoryItem', catalog_id = categoryItem.category_id ,item_id = categoryItem.id )}}" class="button button-outline">Back</a>
+				<input type="submit" value="Save">
+				<p class="flash_message"></p>
+			</form>
+		</div>
+	</div>
+
+{% endblock %}

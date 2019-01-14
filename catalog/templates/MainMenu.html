@@ -1,0 +1,57 @@
+{% extends "Main.html" %}
+
+{% block content %}
+
+	<div class="row">
+		<div class="category">
+			<div class="MainMenu_list">
+				<h6 class="list_header">
+					<span class="header_title">Categories</span>
+					<span class="header_bar"></span>
+				</h6>
+				<ul class="list_items">
+					{% for category in categories %}
+						<a href="{{url_for('showCategory', catalog_id = category.id )}}">
+							<li class="items_item">
+								<span class="item_name">{{category.name}}</span>
+							</li>
+						</a>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+
+		<div class="latest">
+			<div class="latest_list">
+				<h6 class="list_header">
+					<span class="header_title">Latest Added Movies</span>
+					<span class="header_bar"></span>
+				</h6>
+				<ul class="list_items">
+					{% for categoryItem in categoryItems %}
+						<a href="{{url_for('showCategoryItem', catalog_id = categoryItem.category_id ,item_id = categoryItem.id )}}">
+							<li class="items_item">
+								<span class="item_name">{{categoryItem.name}}</span>
+								<span class="item_type">({{categoryItem.category.name}})</span>
+							</li>
+						</a>
+					{% endfor %}
+				</ul>
+				{% with messages = get_flashed_messages() %}
+					{% if messages %}
+						{% for message in messages %}
+							 <p class="flash_message">{{ message }}</p>
+						{% endfor %}
+					{% endif %}
+				{% endwith %}
+
+			</div>
+
+		</div>
+		<br>
+		{% if 'username' in session %}
+			<a href="{{url_for('addItem')}}" class="list_add">Add Movie</a>
+		{% endif %}
+	</div>
+
+{% endblock %}

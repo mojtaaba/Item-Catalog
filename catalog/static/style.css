@@ -1,0 +1,192 @@
+
+
+ul {
+	list-style-type: none;
+	text-decoration: none;
+	font-weight: bold;
+}
+a  {
+	text-decoration: none;
+		font-size: 1.5rem;
+		color: #000000;
+}
+fieldset {
+max-width: 30rem;
+}
+.flash_message {
+	display: block;
+	font-size: 1.3rem;
+	font-weight: 700;
+	letter-spacing: .1rem;
+	text-transform: uppercase;
+	color: #22b59b;
+}
+
+
+.wrapper .container {
+	max-width: 80rem;
+}
+
+.header {
+    background: #1c262f;
+    border-bottom: .1rem solid #d1d1d1;
+    display: block;
+    height: 5.2rem;
+    width: 100%;
+}
+
+.header .header_title {
+	color: #ffffff;
+	display: inline;
+	line-height: 5.2rem;
+	position: relative;
+}
+.header_title {
+color: #bb0b0b;
+font-size: 2.1rem;
+
+
+}
+
+.header_title .title_text {
+	display: inline;
+	padding-left: 20px;
+	font-size: 1.5rem;
+	font-weight: 700;
+	letter-spacing: .1rem;
+	color: #ffffff;
+}
+
+.title_text{
+text-decoration: underline;
+
+
+}
+.header_user {
+	float: right;
+	list-style: none;
+	margin-bottom: 0;
+}
+
+.header_user .user_nav {
+	line-height: 5.2rem;
+	text-decoration: underline;
+	font-size: 1.5rem;
+	font-weight: 700;
+	letter-spacing: .1rem;
+	text-transform: uppercase;
+	color: #ffffff;
+}
+
+.content .container {
+	background: #f4f5f6;
+	margin-bottom: 2rem;
+	margin-left:  5rem;
+	padding: 2rem;
+
+	border-bottom: .1rem solid #d1d1d1;
+}
+
+
+	.content .container {
+		margin-top: 2rem;
+		border: .1rem solid #d1d1d1;
+	}
+
+
+	.MainMenu {
+		display: inline;
+
+	}
+
+
+.list_header .header_title {
+	font-weight: 700;
+	margin-bottom: 1rem;
+	display: block;
+	text-transform: capitalize;
+}
+
+.list_header .header_bar {
+	border-bottom: .3rem solid #1c262f;
+	height: .1rem;
+	display: block;
+	width: 10rem;
+}
+
+.items_item .item_name {
+	text-transform: capitalize;
+	color: #332d2d;
+}
+
+
+.items_item .item_type {
+	color: #c0c0c0;
+	font-style: italic;
+	text-transform: capitalize;
+}
+
+ .list_add {
+	font-size: 2.0rem;
+	color: #000000;
+	height: 2.8rem;
+	line-height: 2;
+	text-decoration:underline;
+}
+
+
+.category-item_header .header_title {
+	font-weight: 700;
+	margin-bottom: 1rem;
+	display: block;
+	text-transform: capitalize;
+}
+
+.category-item_header .header_bar {
+	border-bottom: .3rem solid #1c262f;
+	height: .1rem;
+	display: block;
+	width: 10rem;
+}
+
+.category-item_description {
+	font-size: 1.5rem;
+	margin-bottom: 1rem;
+}
+
+.category-item_controls .controls_edit,
+.category-item_controls .controls_delete,
+.category-item_controls .controls_back {
+	display: inline;
+	font-size: 1.1rem;
+	font-weight: 700;
+	letter-spacing: .1rem;
+	text-transform: uppercase;
+	margin-right: .2rem;
+}
+
+.category-item_message {
+	font-size: 2.1rem;
+	color: #bf0000;
+}
+
+
+
+.category-item_form .form_label {
+	display: inline;
+	font-size: 1.1rem;
+	font-weight: 700;
+	letter-spacing: .1rem;
+	text-transform: uppercase;
+}
+
+.category {
+display:inline-table;
+padding-right: 25px;
+border-right: .1rem solid #d1d1d1;
+
+}
+.latest , .category-items{
+display:inline-table;
+padding-left: 25px;
+}

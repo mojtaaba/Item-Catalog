@@ -1,0 +1,40 @@
+{% extends "Main.html" %}
+
+{% block content %}
+
+	<div class="row">
+		<div class="category-item column">
+			<h6 class="category-item_header">
+				<span class="header_title">Add New Item</span>
+				<span class="header_bar"></span>
+			</h6>
+			<form action="#" method="post" class="category-item_form">
+				<fieldset id="fieldset">
+					<label for="" class="form_label">Name:</label>
+					<input type="text" name="name" class="form_input">
+					<br>
+					<label for="" class="form_label">Description:</label>
+					<br>
+					<textarea name="description" id="" cols="100" rows="10" class="form_textarea"></textarea>
+					<br>
+					<label for="" class="form_label">Category:</label>
+					<select class="form_select" name="category">
+						{% for category in categories %}
+							<option value="{{category.id}}">{{category.name}}</option>
+						{% endfor %}
+					</select>
+				</fieldset>
+				<br>
+				<input type="submit" value="add item">
+				{% with messages = get_flashed_messages() %}
+					{% if messages %}
+						{% for message in messages %}
+							 <p class="flash_message">{{ message }}</p>
+						{% endfor %}
+					{% endif %}
+				{% endwith %}
+			</form>
+		</div>
+	</div>
+
+{% endblock %}
